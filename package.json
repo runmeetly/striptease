@@ -1,0 +1,38 @@
+{
+  "name": "@runmeetly/striptease",
+  "version": "0.0.1-SNAPSHOT",
+  "description": "Strip sensitive information from objects and arrays",
+  "main": "dist/striptease.min.js",
+  "repository": "https://github.com/runmeetly/striptease",
+  "author": "Peter Yamanaka <peter@runmeetly.com>",
+  "license": "Apache-2.0",
+  "private": false,
+  "keywords": [
+    "logs",
+    "logger",
+    "sensitive",
+    "sanitization",
+    "es6",
+    "promise"
+  ],
+  "devDependencies": {
+    "@babel/core": "7.5.5",
+    "@babel/preset-env": "7.5.5",
+    "@babel/register": "7.5.5",
+    "babel-loader": "8.0.6",
+    "babel-polyfill": "6.26.0",
+    "cross-env": "5.2.0",
+    "prettier": "1.18.2",
+    "uglifyjs-webpack-plugin": "2.2.0",
+    "webpack": "4.39.2",
+    "webpack-cli": "3.3.7"
+  },
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --progress --colors --optimize-minimize",
+    "clean-dist": "[ -e ./dist ] && [ -d ./dist ] && rm -rf ./dist",
+    "clean-modules": "[ -e ./node_modules ] && [ -d ./node_modules ] && rm -rf ./node_modules",
+    "clean": "yarn clean-dist && yarn clean-modules",
+    "prepare-publish": "yarn clean && yarn && yarn build",
+    "test": "yarn build && node test/test.js"
+  }
+}

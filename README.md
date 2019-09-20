@@ -12,7 +12,7 @@ $ yarn add @runmeetly/striptease
 
 ## What
 
-A small utility that searches searches a list of arguments and strips out sensitive bits.
+A small utility that searches a list of arguments and strips out sensitive bits.
 It does not perform any logging on its own however - it simply processes arguments so that
 they can be passed on to `console` or other logging systems.
 

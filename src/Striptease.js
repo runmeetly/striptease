@@ -148,13 +148,16 @@ export class Striptease {
       /**
        * Strip stuff
        *
+       * The result of strip() will always be a Promise that resolves to an array.
+       * Spread the array out before using it as a drop in replacement for vararg methods.
+       *
        * @param {*} args - Anything
-       * @return {Promise<*>} - A promise with the same stuff, just stripped
+       * @return {Promise<Array<*>>} - A promise with the same stuff, just stripped
        */
       async strip(...args) {
-        // If nothing, return original
+        // If nothing, an empty array to adhere to API contract
         if (!args || args.length <= 0) {
-          return args;
+          return [];
         }
 
         // Or no sensitive keys

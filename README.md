@@ -98,10 +98,13 @@ const stripper = Striptease.create({
   failOnError: optionalFailOnError
 });
 
-// The result of strip() will always be an array, so spread it out to get clean logs
-console.log(...stripper.strip("Take a look at this data: ", sensitive));
+// The result of strip() will always be a Promise that resolves
+// to an array, so spread it out to get clean logs
+stripper
+  .strip("Take a look at this data: ", sensitive)
+  .then(result => console.log(...result));
 
-// Prints
+// Prints after delay
 //
 // 'Take a look at this data: [
 //     "This",

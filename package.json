@@ -1,6 +1,6 @@
 {
   "name": "@runmeetly/striptease",
-  "version": "0.0.2",
+  "version": "0.0.3-SNAPSHOT",
   "description": "Strip sensitive information from objects and arrays",
   "main": "dist/striptease.min.js",
   "repository": "https://github.com/runmeetly/striptease",

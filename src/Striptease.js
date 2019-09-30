@@ -20,6 +20,9 @@ const DEFAULT_SENSITIVE_KEYS = [];
 const DEFAULT_PANIC_HANDLER = null;
 const DEFAULT_FAIL_ON_ERROR = true;
 const DEFAULT_MAX_DEPTH = 4;
+const DEFAULT_BARE = true;
+
+const COVERUP = "*";
 
 /**
  * Strips things.
@@ -33,6 +36,7 @@ export class Striptease {
    *   panic: {Function: null},
    *   failOnError: {Boolean: true},
    *   maxDepth: {Number: 4}
+   *   bare: {Boolean: false}
    * }} options - Options object
    *
    * @return {Stripper} - Strip stuff
@@ -53,6 +57,7 @@ export class Striptease {
     const panic = teaseOptions.panic || DEFAULT_PANIC_HANDLER;
     const failOnError = teaseOptions.failOnError || DEFAULT_FAIL_ON_ERROR;
     const maxDepth = teaseOptions.maxDepth || DEFAULT_MAX_DEPTH;
+    const bare = teaseOptions.bare || DEFAULT_BARE;
 
     /**
      * Strip sensitive info from arrays
@@ -79,6 +84,11 @@ export class Striptease {
         } else if (sensitiveKeys.indexOf(item) < 0) {
           // Just make sure that the item is not sensitive
           stripped.push(item);
+        } else {
+          // This item is sensitive. If we are not stripping bare, add it as a '*'
+          if (!bare) {
+            stripped.push(COVERUP);
+          }
         }
       }
 
@@ -107,9 +117,13 @@ export class Striptease {
           continue;
         }
 
-        // If this is a sensitive key, we strip it out
         if (sensitiveKeys.indexOf(key) >= 0) {
-          continue;
+          // If this is a sensitive key and we are stripping bare, we strip it out
+          if (bare) {
+            continue;
+          } else {
+            stripped[key] = COVERUP;
+          }
         }
 
         // Grab the value
@@ -133,8 +147,14 @@ export class Striptease {
           continue;
         }
 
+        // If the item is not sensitive, add it in
         if (sensitiveKeys.indexOf(value) < 0) {
           stripped[key] = value;
+        } else {
+          // This item is sensitive. If we are not stripping bare, add it as a '*'
+          if (!bare) {
+            stripped[key] = COVERUP;
+          }
         }
       }
 
@@ -179,6 +199,11 @@ export class Striptease {
             } else if (sensitiveKeys.indexOf(arg) < 0) {
               // Else we pray
               stripped.push(arg);
+            } else {
+              // This item is sensitive. If we are not stripping bare, add it as a '*'
+              if (!bare) {
+                stripped.push(COVERUP);
+              }
             }
           }
 

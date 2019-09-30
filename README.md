@@ -91,11 +91,16 @@ const optionalMaxDepth = 4;
 // the leaking of potentially sensitive information.
 const optionalFailOnError = false;
 
+// If this flag is set to false (default), sensitive data will be replaced with '*'
+// If this flag is set to true, sensitive data will be deleted out of the payload
+const optionalBare = true;
+
 const stripper = Striptease.create({
   sensitive: requiredSensitiveKeysArray,
   panic: optionalPanicHandler,
   maxDepth: optionalMaxDepth,
-  failOnError: optionalFailOnError
+  failOnError: optionalFailOnError,
+  bare: optionalBare
 });
 
 // The result of strip() will always be a Promise that resolves

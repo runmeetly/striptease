@@ -57,7 +57,10 @@ export class Striptease {
     const panic = teaseOptions.panic || DEFAULT_PANIC_HANDLER;
     const failOnError = teaseOptions.failOnError || DEFAULT_FAIL_ON_ERROR;
     const maxDepth = teaseOptions.maxDepth || DEFAULT_MAX_DEPTH;
-    const bare = teaseOptions.bare || DEFAULT_BARE;
+    const bare =
+      teaseOptions.bare === undefined || teaseOptions.bare === null
+        ? DEFAULT_BARE
+        : !!teaseOptions.bare;
 
     /**
      * Strip sensitive info from arrays

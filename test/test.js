@@ -24,12 +24,13 @@ const { Striptease } = require("../dist/striptease.min.js");
 
 const SENSITIVE_KEYS = ["name", "email"];
 
-function createStripper(optionsAsArray) {
+function createStripper(optionsAsArray, bare) {
   return Striptease.create(
     !!optionsAsArray
       ? SENSITIVE_KEYS
       : {
           sensitive: SENSITIVE_KEYS,
+          bare: bare,
           maxDepth: 99
         }
   );
@@ -48,7 +49,7 @@ async function runTest(testName, stripper, test) {
 }
 
 async function listTest() {
-  const stripper = createStripper(true);
+  const stripper = createStripper(false, false);
   await runTest("List Test", stripper, [
     1,
     2,
@@ -113,7 +114,7 @@ async function emptyStripperObjectTest() {
 }
 
 async function objectTest() {
-  const stripper = createStripper(true);
+  const stripper = createStripper(false, true);
   await runTest("Object Test", stripper, {
     1: "a",
     2: "b",

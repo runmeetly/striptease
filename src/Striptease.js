@@ -126,6 +126,7 @@ export class Striptease {
             continue;
           } else {
             stripped[key] = COVERUP;
+            continue;
           }
         }
 

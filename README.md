@@ -12,13 +12,14 @@ $ yarn add @runmeetly/striptease
 
 ## What
 
-A small utility that searches a list of arguments and strips out sensitive bits.
-It does not perform any logging on its own however - it simply processes arguments so that
-they can be passed on to `console` or other logging systems.
+A small utility that searches a list of arguments and strips out sensitive
+bits. It does not perform any logging on its own however - it simply processes
+arguments so that they can be passed on to `console` or other logging systems.
 
 ## Why
 
-For fun, and a cheap way to naively remove potentially sensitive information from system logs.
+For fun, and a cheap way to naively remove potentially sensitive information
+from system logs.
 
 ## How
 
@@ -125,29 +126,34 @@ stripper
 
 ## What Can It Do
 
-`striptease` can search through `Arrays []` and `Objects {}` and remove sensitive information.
-In the case of an `Object {}` it will remove the key value pair. It can also dive into nested objects
-and remove sensitive data from those nested objects. It can dive into nested arrays following the
-logic below.
+`striptease` can search through `Arrays []` and `Objects {}` and remove
+sensitive information. It can remove this sensitive data by either redacting
+it, or by completely deleting it from the input as if it was never there.
+In the case of an `Object {}` it will remove the key value pair. It can
+also dive into nested objects and remove sensitive data from those nested
+objects. It can dive into nested arrays following the logic below.
 
-In the case of an `Array []`, it will remove the index if it is a `String`, it can also dive into
-nested arrays, or nested objects following the object rule above.
+In the case of an `Array []`, it will remove the index if it is a `String`,
+it can also dive into nested arrays, or nested objects following the object
+rule above.
 
-You can also configure `striptease` to only dive to a `maxDepth` which will prevent it from going
-so deep that it begins to affect performance. By default it will dive into nested objects that are
-4 levels deep.
+You can also configure `striptease` to only dive to a `maxDepth` which will
+prevent it from going so deep that it begins to affect performance. By default
+it will dive into nested objects that are 4 levels deep.
 
-To attempt to mitigate the performance hit caused by processing potentially large objects, all
-operations run as `async/await` coroutine style calls, which should help by offloading work to
-the closest microtask loop. This means that stripping operations will not block, and will never be
-immediate. If you have - for some reason - performance critical log expectations,
-you should strip sensitive information by hand.
+To attempt to mitigate the performance hit caused by processing potentially
+large objects, all operations run as `async/await` coroutine style calls,
+which should help by offloading work to the closest microtask tick. This means
+that stripping operations will not block, and will never be immediate.
+If you have - for some reason - performance critical log expectations, you
+should strip sensitive information by hand.
 
 ## What Can't It Do
 
-For performance reasons, `striptease` will not attempt to strip sensitive information out of plain
-`String` arguments passed to it. `striptease` will only attempt to operate on complex data which is
-in the form of either an `Array []` or an `Object {}`.
+For performance reasons, `striptease` will not attempt to strip sensitive
+information out of plain `String` arguments passed to it. `striptease` will
+only attempt to operate on complex data which is in the form of either an
+`Array []` or an `Object {}`.
 
 # Credit
 

@@ -20,7 +20,7 @@ const DEFAULT_SENSITIVE_KEYS = [];
 const DEFAULT_PANIC_HANDLER = null;
 const DEFAULT_FAIL_ON_ERROR = true;
 const DEFAULT_MAX_DEPTH = 4;
-const DEFAULT_BARE = true;
+const DEFAULT_BARE = false;
 
 const COVERUP = "*";
 

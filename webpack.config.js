@@ -52,7 +52,7 @@ const config = {
     library: "Striptease",
     libraryTarget: "umd",
     umdNamedDefine: true,
-    globalObject: `typeof self !== 'undefined' ? self : this`
+    globalObject: "this"
   },
   module: {
     rules: [
@@ -68,19 +68,7 @@ const config = {
       }
     ]
   },
-  resolve: {
-    modules: [path.resolve("./node_modules"), path.resolve("./src")],
-    extensions: [".js"]
-  },
-  plugins: plugins,
-  externals: {
-    promise: {
-      commonjs: "promise",
-      commonjs2: "promise",
-      amd: "promise",
-      root: "Promise"
-    }
-  }
+  plugins
 };
 
 module.exports = config;

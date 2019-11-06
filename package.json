@@ -1,12 +1,17 @@
 {
   "name": "@runmeetly/striptease",
-  "version": "0.0.4-SNAPSHOT",
+  "version": "0.0.4",
   "description": "Strip sensitive information from objects and arrays",
   "main": "dist/striptease.min.js",
   "repository": "https://github.com/runmeetly/striptease",
   "author": "Peter Yamanaka <peter@runmeetly.com>",
   "license": "Apache-2.0",
   "private": false,
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist/"
+  ],
   "keywords": [
     "logs",
     "logger",
@@ -16,16 +21,16 @@
     "promise"
   ],
   "devDependencies": {
-    "@babel/core": "7.6.4",
-    "@babel/preset-env": "7.6.3",
-    "@babel/register": "7.6.2",
+    "@babel/core": "7.7.0",
+    "@babel/preset-env": "7.7.1",
+    "@babel/register": "7.7.0",
     "babel-loader": "8.0.6",
     "babel-polyfill": "6.26.0",
     "cross-env": "6.0.3",
     "prettier": "1.18.2",
     "uglifyjs-webpack-plugin": "2.2.0",
-    "webpack": "4.41.0",
-    "webpack-cli": "3.3.9"
+    "webpack": "4.41.2",
+    "webpack-cli": "3.3.10"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --colors --optimize-minimize",

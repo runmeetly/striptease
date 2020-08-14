@@ -43,7 +43,7 @@ export class Striptease {
    */
   static create(options) {
     let teaseOptions = DEFAULT_OPTIONS_OBJECT;
-    if (!!options) {
+    if (options) {
       if (Array.isArray(options)) {
         // If the options passed is an array, treat it as the sensitive keys
         teaseOptions.sensitive = options;
@@ -60,7 +60,7 @@ export class Striptease {
     const bare =
       teaseOptions.bare === undefined || teaseOptions.bare === null
         ? DEFAULT_BARE
-        : !!teaseOptions.bare;
+        : teaseOptions.bare;
 
     /**
      * Strip sensitive info from arrays
@@ -116,7 +116,7 @@ export class Striptease {
 
       // For the keys in the object
       for (const key of Object.keys(object)) {
-        if (!object.hasOwnProperty(key)) {
+        if (!{}.hasOwnProperty.call(object, key)) {
           continue;
         }
 
@@ -214,13 +214,13 @@ export class Striptease {
           // May be empty if no args were kept
           return stripped;
         } catch (e) {
-          if (!!panic) {
+          if (panic) {
             panic(new StripteaseError(e, teaseOptions));
           }
 
           // If we are marked as fail on error, do not return anything because
           // we do not want to expose potentially sensitive information.
-          if (!!failOnError) {
+          if (failOnError) {
             return [];
           }
 

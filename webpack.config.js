@@ -49,13 +49,38 @@ const config = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: outputFile,
-    library: "Striptease",
+    library: libraryName,
     libraryTarget: "umd",
     umdNamedDefine: true,
     globalObject: "this"
   },
   module: {
     rules: [
+      // Disable require.ensure as it's not a standard language feature.
+      { parser: { requireEnsure: false } },
+
+      // First, run the linter.
+      // It's important to do this before Babel processes the JS.
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|build|devel)/,
+        enforce: "pre",
+        use: [
+          {
+            options: {
+              cache: true,
+              eslintPath: require.resolve("eslint"),
+            },
+            loader: require.resolve("eslint-loader"),
+          },
+        ],
+      },
+      {
+        test: /\.js$/,
+        exclude: /(build|devel)/,
+        enforce: "pre",
+        loader: "source-map-loader",
+      },
       {
         test: /(\.jsx|\.js)$/,
         exclude: /node_modules/,

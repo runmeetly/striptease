@@ -33,7 +33,7 @@
     "source-map-loader": "1.0.1",
     "uglifyjs-webpack-plugin": "2.2.0",
     "webpack": "4.44.1",
-    "webpack-cli": "3.3.10"
+    "webpack-cli": "3.3.12"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --colors --optimize-minimize",
